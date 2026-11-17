@@ -33,4 +33,4 @@ python3 -m http.server 8000                                # open http://localho
 
 ## Licence
 
-MIT for the code in this repository (see [`LICENSE`](LICENSE) for third-party parts). Made by [@valerio.swiss](https://valerioswiss.com) as a personal project.
+MIT for the code in this repository (see [`LICENSE`](LICENSE); third-party parts in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)). Made by [@valerio.swiss](https://valerioswiss.com) as a personal project.

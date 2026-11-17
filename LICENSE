@@ -19,10 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-Third-party parts keep their own licences: flag SVGs (flag-icons, MIT, see
-content-factory/public/flags/), sound effects (Kenney, CC0), Swiss borders
-(swisstopo / Swiss Federal Statistical Office via swiss-maps), withholding tax
-tariffs (Swiss Federal Tax Administration ESTV). Remotion itself is NOT MIT:
-see https://www.remotion.dev/license.
