@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Swiss Net Salary 2026</title>
+<meta name="description" content="Net salary in Switzerland for people taxed at source: 2026 contributions and withholding tax for all 26 cantons. Runs in your browser."/>
+<style>
+  :root{--bg:#F7F6F3;--surface:#fff;--text:#121212;--text2:#4A4A4A;--text3:#6B6B6B;--line:#E5E2DC;--accent:#3B5BDB;--accent-d:#2B44A8;--net:#15803D;--r:16px;
+    --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  @media (prefers-color-scheme:dark){:root{--bg:#141414;--surface:#1E1E1E;--text:#F2F2F2;--text2:#C9C9C9;--text3:#A0A0A0;--line:#333;--accent:#8FA6FF;--accent-d:#6F88F0;--net:#4ADE80}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--font)}
+  main{max-width:860px;margin:0 auto;padding:40px 16px 60px}
+  h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 10px;letter-spacing:-.02em}
+  .lead{color:var(--text2);margin:0 0 26px;max-width:640px}
+  .box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-bottom:18px}
+  .box h2{font-size:17px;margin:0 0 14px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--text2)}
+  input,select{font:inherit;font-size:15px;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+  input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .check{flex-direction:row;align-items:center;font-weight:500;margin-top:14px}
+  .check input{width:18px;height:18px;accent-color:var(--accent)}
+  details{margin-top:14px}summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px}
+  .result{background:var(--accent);color:#fff;border-radius:var(--r);padding:24px;margin-bottom:18px}
+  .result .big{font-size:clamp(32px,6vw,48px);font-weight:800;line-height:1.1;margin:6px 0}
+  .result small{font-size:.45em;font-weight:600;opacity:.9}
+  @media (prefers-color-scheme:dark){.result{color:#0E1530}}
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+  th:first-child,td:first-child{text-align:left;white-space:normal}
+  th{font-size:12px;color:var(--text3);font-weight:600}
+  td .p{font-size:12.5px;color:var(--text3)}
+  tr.tot td{font-weight:800;color:var(--net)} tr.me td{font-weight:700;background:color-mix(in srgb,var(--accent) 10%,transparent)}
+  .wrap{overflow-x:auto}
+  button.btn{font:inherit;font-weight:600;background:var(--accent);color:#fff;border:0;border-radius:999px;padding:10px 22px;cursor:pointer}
+  button.btn:disabled{opacity:.6}
+  .note{font-size:14px;color:var(--text2)}
+  footer{font-size:13px;color:var(--text3);margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer a{color:var(--text2)}
+  @media (max-width:640px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Your net salary in Switzerland, 2026</h1>
+  <p class="lead">For people taxed at source (for example with a B permit): social contributions and the official 2026 withholding tax of your canton. Everything runs in your browser; nothing is sent anywhere.</p>
+
+  <div class="box">
+    <h2>1 · Gross salary</h2>
+    <div class="grid">
+      <label>Gross per year (CHF)<input type="number" id="gross" value="80000" min="0" step="500" inputmode="numeric"/></label>
+      <label>Payments per year<select id="payments"><option value="12">12</option><option value="13">13 (with a 13th salary)</option></select></label>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>2 · Where you live and your situation</h2>
+    <div class="grid">
+      <label>Canton of residence<select id="canton"></select></label>
+      <label>Age<select id="age"><option value="18">Under 25</option><option value="25" selected>25–34</option><option value="35">35–44</option><option value="45">45–54</option><option value="55">55–65</option></select></label>
+      <label>Situation<select id="situation"><option value="A">Single, no children</option><option value="B">Married, one income</option><option value="C">Married, both working</option><option value="H">Single parent</option></select></label>
+      <label>Children<select id="children"><option value="0">None</option><option value="1">1 child</option><option value="2">2 children</option></select></label>
+    </div>
+    <label class="check"><input type="checkbox" id="church"/> I pay church tax</label>
+    <details>
+      <summary>Customise deductions (optional)</summary>
+      <div class="grid" style="margin-top:12px">
+        <label>Non-occupational accident (% of gross)<input type="number" id="nbu" value="1.2" min="0" max="5" step="0.1"/></label>
+        <label>2nd pillar (% of gross, empty = legal minimum)<input type="number" id="bvg" min="0" max="20" step="0.1"/></label>
+        <label>Other deductions (% of gross)<input type="number" id="other" value="0" min="0" max="10" step="0.1"/></label>
+      </div>
+    </details>
+  </div>
+
+  <div class="result" aria-live="polite">
+    <div>Net per month</div>
+    <div class="big" id="big">…</div>
+    <div id="detail">Loading the canton's tables…</div>
+  </div>
+
+  <div class="box">
+    <h2>Payslip, line by line</h2>
+    <div class="wrap"><table id="slip"><thead><tr><th>Item</th><th>Per month</th><th>Per year</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="box">
+    <h2>The same salary in all 26 cantons</h2>
+    <button type="button" class="btn" id="compare">Compare the 26 cantons</button>
+    <div class="wrap"><table id="cmp" hidden><thead><tr><th>Canton</th><th>Rate</th><th>Net per month</th><th>Net per year</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <p class="note"><b>Included:</b> OASI/DI/APG 5.3%, unemployment 1.1% up to CHF 148,200, non-occupational accident insurance, 2nd pillar at the legal minimum and the 2026 withholding tax. <b>Not included:</b> family allowances, bonuses, health insurance premiums (paid separately). Not for C permit holders or cross-border commuters. From CHF 120,000 gross a year a tax return is mandatory and the final tax may differ. <b>An estimate, not tax advice.</b></p>
+
+  <footer>Data: Swiss Federal Tax Administration (ESTV), withholding tax tariffs 2026; AHV/IV information centre; FSIO. Original tool: <a href="https://valerioswiss.com/strumenti/calcolatore-stipendio-netto">valerioswiss.com</a>. MIT licence.</footer>
+</main>
+<script src="qst.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NAMES = {AG:"Aargau",AI:"Appenzell Innerrhoden",AR:"Appenzell Ausserrhoden",BE:"Bern",BL:"Basel-Landschaft",BS:"Basel-Stadt",FR:"Fribourg",GE:"Geneva",GL:"Glarus",GR:"Graubünden",JU:"Jura",LU:"Lucerne",NE:"Neuchâtel",NW:"Nidwalden",OW:"Obwalden",SG:"St. Gallen",SH:"Schaffhausen",SO:"Solothurn",SZ:"Schwyz",TG:"Thurgau",TI:"Ticino",UR:"Uri",VD:"Vaud",VS:"Valais",ZG:"Zug",ZH:"Zurich"};
+  var chf = function (n) { return Math.round(n).toLocaleString("en-US") + " CHF"; };
+  var pct = function (x, d) { return (x * 100).toFixed(d) + "%"; };
+  var num = function (id, def) { var v = parseFloat($(id).value); return isFinite(v) ? v : def; };
+  var cache = {};
+  function load(kt) {
+    if (!cache[kt]) cache[kt] = fetch("data/qst-2026/" + kt.toLowerCase() + ".json")
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(SwissNet.expand).catch(function (e) { delete cache[kt]; throw e; });
+    return cache[kt];
+  }
+  Object.keys(NAMES).sort(function (a, b) { return NAMES[a].localeCompare(NAMES[b]); }).forEach(function (k) {
+    var o = document.createElement("option"); o.value = k; o.textContent = NAMES[k]; $("canton").appendChild(o);
+  });
+  $("canton").value = "ZH";
+  function input() {
+    var bvg = $("bvg").value.trim();
+    return { gross: Math.max(0, num("gross", 0)), payments: +$("payments").value, canton: $("canton").value, age: $("age").value,
+      situation: $("situation").value, children: +$("children").value, church: $("church").checked,
+      nbu: Math.max(0, num("nbu", 1.2)), other: Math.max(0, num("other", 0)), bvg: bvg === "" ? null : Math.max(0, num("bvg", 0)) };
+  }
+  function syncChildren() {
+    var s = $("situation").value, c = $("children");
+    c.querySelector('option[value="0"]').disabled = s === "H";
+    if (s === "H" && c.value === "0") c.value = "1";
+    c.disabled = s === "A"; if (s === "A") c.value = "0";
+  }
+  var ROWS = [["ahv","OASI, DI, APG (AHV/IV/EO)"],["alv","Unemployment (ALV)"],["nbu","Non-occupational accident"],["other","Other deductions"],["bvg","2nd pillar (pension fund)"],["withholding","Withholding tax"]];
+  var turn = 0;
+  function update() {
+    var x = input(), mine = ++turn;
+    load(x.canton).then(function (d) {
+      if (mine !== turn) return;
+      var r = SwissNet.calculate(d, x);
+      if (!r || !x.gross) { $("big").textContent = "—"; $("detail").textContent = "Enter your gross salary."; return; }
+      var y = r.year, m = r.month;
+      $("big").innerHTML = chf(m.net) + (x.payments === 13 ? " <small>× 12 + 13th salary</small>" : " <small>× 12</small>");
+      var det = "Over a year you keep <b>" + chf(y.net) + "</b>. Withholding tax in " + NAMES[x.canton] + ": <b>" + pct(r.rate, 2) + "</b> (tariff " + r.tariff + ")";
+      if (r.december) det += "; in December, with the 13th salary, you receive <b>" + chf(r.december.net) + "</b>";
+      $("detail").innerHTML = det + ".";
+      var rows = "<tr><td>Gross salary</td><td>" + chf(m.gross) + "</td><td>" + chf(y.gross) + "</td></tr>";
+      ROWS.forEach(function (k) { if (k[0] === "other" && y.other <= 0) return; rows += "<tr><td>" + k[1] + "</td><td>− " + chf(m[k[0]]) + "</td><td>− " + chf(y[k[0]]) + "</td></tr>"; });
+      rows += '<tr class="tot"><td>Net</td><td>' + chf(m.net) + "</td><td>" + chf(y.net) + "</td></tr>";
+      $("slip").querySelector("tbody").innerHTML = rows;
+    }).catch(function () {
+      if (mine !== turn) return;
+      $("big").textContent = "—";
+      $("detail").textContent = "The tables could not be loaded. Open this page through a web server (see README), not as a file.";
+    });
+  }
+  var compared = false;
+  function compare() {
+    var x = input(), btn = $("compare"); btn.disabled = true;
+    Promise.all(SwissNet.CANTONS.map(function (k) { return load(k).then(function (d) { return { k: k, r: SwissNet.calculate(d, x) }; }); }))
+      .then(function (all) {
+        all = all.filter(function (o) { return o.r; }).sort(function (a, b) { return b.r.year.net - a.r.year.net; });
+        $("cmp").querySelector("tbody").innerHTML = all.map(function (o, i) {
+          return "<tr" + (o.k === x.canton ? ' class="me"' : "") + "><td>" + (i + 1) + ". " + NAMES[o.k] + "</td><td>" + pct(o.r.rate, 2) + "</td><td>" + chf(o.r.month.net) + "</td><td>" + chf(o.r.year.net) + "</td></tr>";
+        }).join("");
+        $("cmp").hidden = false; compared = true; btn.disabled = false; btn.textContent = "Update the comparison";
+      }).catch(function () { btn.disabled = false; btn.textContent = "Try again"; });
+  }
+  ["gross","payments","canton","age","situation","children","church","nbu","bvg","other"].forEach(function (id) {
+    $(id).addEventListener(/gross|nbu|bvg|other/.test(id) ? "input" : "change", function () { if (id === "situation") syncChildren(); update(); if (compared) compare(); });
+  });
+  $("compare").addEventListener("click", compare);
+  syncChildren(); update();
+})();
+</script>
+</body>
+</html>

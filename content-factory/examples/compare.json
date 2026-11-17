@@ -1,0 +1,17 @@
+{
+  "template": "ReelConfronto",
+  "out": "out/compare.mp4",
+  "props": {
+    "title": "City A or City B?",
+    "titleAccent": "Same salary, two lives.",
+    "a": { "name": "City A", "flag": "ch", "media": "demo/a.svg" },
+    "b": { "name": "City B", "flag": "de", "media": "demo/b.svg" },
+    "rounds": [
+      { "label": "Net per month", "context": "same gross salary, single", "a": { "value": 5200, "suffix": "CHF" }, "b": { "value": 3100, "suffix": "EUR" }, "winner": "a" },
+      { "label": "Average rent", "context": "1-bedroom flat", "a": { "value": 1900, "suffix": "CHF" }, "b": { "value": 1100, "suffix": "EUR" }, "winner": "b" }
+    ],
+    "verdict": "It depends on what you value.",
+    "verdictAccent": "Do the maths for your case.",
+    "source": "Sources: replace with official sources. General information, not advice."
+  }
+}

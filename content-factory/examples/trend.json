@@ -1,0 +1,5 @@
+{
+  "template": "ReelTrend",
+  "out": "out/trend.mp4",
+  "props": {}
+}

@@ -1,0 +1,15 @@
+{
+  "template": "ReelMito",
+  "out": "out/myth.mp4",
+  "props": {
+    "title": "What I thought about working abroad",
+    "titleAccent": "and what is true.",
+    "items": [
+      { "myth": "You need perfect language skills to get hired.", "reality": "Replace with a fact you can source, e.g. the level most job ads ask for." },
+      { "myth": "A higher salary means you save more.", "reality": "Replace with your own numbers: rent, insurance, taxes." }
+    ],
+    "ctaTitle": "Which one surprised you?",
+    "ctaAccent": "Tell me in the comments",
+    "ctaButton": "Link in bio"
+  }
+}

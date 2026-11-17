@@ -1,0 +1,26 @@
+{
+  "name": "content-factory",
+  "version": "0.1.0",
+  "description": "Data-driven vertical videos (quiz, myth vs reality, POV, map, news, A vs B, chart over time) with Remotion",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "tsx scripts/render.ts",
+    "lint": "tsc"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.448",
+    "@remotion/google-fonts": "4.0.448",
+    "@remotion/transitions": "4.0.448",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.448",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "tsx": "^4.21.0",
+    "typescript": "5.9.3"
+  }
+}
